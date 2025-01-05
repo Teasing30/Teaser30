@@ -1,0 +1,159 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Countdown Begins</title>
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            background: black;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Matrix Effect */
+        .matrix {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #0f0;
+            font-size: 20px;
+            font-family: monospace;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .matrix span {
+            position: absolute;
+            display: block;
+            animation: drop 5s linear infinite;
+        }
+        @keyframes drop {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh);
+            }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .header h1 {
+            font-size: 3em;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .header p {
+            font-size: 1.5em;
+            color: #aaa;
+        }
+
+        /* Countdown */
+        .countdown-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+        .countdown {
+            font-size: 2.5em;
+            color: #f00;
+            margin: 20px 0;
+        }
+        .subtext {
+            font-size: 1.2em;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix" id="matrix"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>The Countdown Begins</h1>
+        <p>Something That Will Shake Memecoin Universe</p>
+    </div>
+
+    <!-- Countdown sections -->
+    <div class="countdown-section">
+        <div class="subtext">Countdown to Launch</div>
+        <div class="countdown" id="launchCountdown">Calculating...</div>
+
+        <div class="subtext">Countdown to 2030</div>
+        <div class="countdown" id="agendaCountdown">Calculating...</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Mysterious Project. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Matrix Effect
+        const matrixContainer = document.getElementById('matrix');
+        const createMatrixEffect = () => {
+            for (let i = 0; i < 300; i++) {
+                const span = document.createElement('span');
+                span.textContent = Math.floor(Math.random() * 10);
+                span.style.left = `${Math.random() * 100}vw`;
+                span.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                span.style.animationDelay = `${Math.random() * 5}s`;
+                matrixContainer.appendChild(span);
+            }
+        };
+        createMatrixEffect();
+
+        // Launch Countdown
+        function updateLaunchCountdown() {
+            const launchDate = new Date("January 20, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = launchDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('launchCountdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        //   2030 Countdown
+        function updateAgendaCountdown() {
+            const agendaDate = new Date("January 1, 2030 00:00:00").getTime();
+            const now = new Date().getTime();
+            const timeLeft = agendaDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            document.getElementById('agendaCountdown').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // Update countdowns every second
+        setInterval(() => {
+            updateLaunchCountdown();
+            updateAgendaCountdown();
+        }, 1000);
+    </script>
+</body>
+</html>
